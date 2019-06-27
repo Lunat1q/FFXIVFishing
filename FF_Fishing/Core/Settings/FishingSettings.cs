@@ -31,6 +31,11 @@ namespace FF_Fishing.Core.Settings
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool WindowTopMost { get; set; } = true;
 
+
+        [DefaultValue(3)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public double BiteSoundMultiplier { get; set; } = 3;
+
         [JsonProperty]
         public KeyBindingSettings BindingSettings
         {

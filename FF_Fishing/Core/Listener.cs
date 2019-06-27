@@ -20,7 +20,7 @@ namespace FF_Fishing.Core
             VolumeQueue = new LimitedCollection<float>(MaxVolumeQueueLength) { 0 };
         }
 
-        public async Task<bool> Listen(int millisecondsToListen, CancellationToken cancellationToken)
+        public async Task<bool> Listen(int millisecondsToListen, double soundLimitMultiplier, CancellationToken cancellationToken)
         {
             VolumeQueue.Clear();
             var stopwatch = new Stopwatch();
@@ -31,7 +31,7 @@ namespace FF_Fishing.Core
             while (stopwatch.ElapsedMilliseconds <= millisecondsToListen)
             {
                 await Task.Delay(TickRate, cancellationToken);
-                if (SpikeDetected())
+                if (SpikeDetected(soundLimitMultiplier))
                 {
                     return true;
                 }
@@ -39,14 +39,14 @@ namespace FF_Fishing.Core
             return false;
         }
 
-        private bool SpikeDetected()
+        private bool SpikeDetected(double soundLimitMultiplier)
         {
             var hear = false;
             var level = _sndDevice.AudioMeterInformation.MasterPeakValue * 100;
             if(VolumeQueue.Count() == MaxVolumeQueueLength && level > 1)
             {
                 var avgVol = GetAverageVolume();
-                hear = level / avgVol >= 3;
+                hear = level / avgVol >= soundLimitMultiplier;
             }
 
             // Keep a running queue of the last X sounds as a reference point

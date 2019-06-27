@@ -96,6 +96,16 @@ namespace FF_Fishing.Controller
             }
         }
 
+        public double BiteSoundMultiplier
+        {
+            get => _settings?.BiteSoundMultiplier ?? 3d;
+            set
+            {
+                _settings.BiteSoundMultiplier = value;
+                OnPropertyChanged();
+            }
+        }
+
         public float AverageSoundLevel
         {
             get => _averageSoundLevel;
@@ -212,7 +222,7 @@ namespace FF_Fishing.Controller
                     await Task.Delay(_settings.TimersSettings.AfterCast, ctx);
 
                     AddLogMessage(watch.Elapsed, "Listening for a catch...");
-                    var fishHeard = await _soundListener.Listen(_settings.TimersSettings.HookWait, ctx);
+                    var fishHeard = await _soundListener.Listen(_settings.TimersSettings.HookWait, BiteSoundMultiplier, ctx);
 
                     if (fishHeard)
                     {
