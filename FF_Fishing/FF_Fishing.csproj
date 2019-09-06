@@ -90,6 +90,8 @@
     <Compile Include="Controller\FishLogEntry.cs" />
     <Compile Include="Controller\MainFishingLogic.cs" />
     <Compile Include="Core\Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Core\Helpers\FishingSkill.cs" />
+    <Compile Include="Core\Helpers\FishingSkillsInfo.cs" />
     <Compile Include="Pages\DataMemberAttribute.cs" />
     <Compile Include="Core\Settings\FishingSettings.cs" />
     <Compile Include="Core\LimitedCollection.cs" />

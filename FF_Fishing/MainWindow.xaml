@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:FF_Fishing"
         xmlns:controller="clr-namespace:FF_Fishing.Controller"
         mc:Ignorable="d" SizeToContent="WidthAndHeight"
-        Title="FFF" HorizontalAlignment="Center" VerticalAlignment="Center"  d:DataContext="{controller:MainFishingLogic}" ResizeMode="CanMinimize" Closing="Window_Closing">
+        Title="FFF" HorizontalAlignment="Center" VerticalAlignment="Center"  
+        d:DataContext="{controller:MainFishingLogic}" ResizeMode="CanMinimize" Closing="Window_Closing"
+        Topmost="{Binding WindowTopMost}">
     <Grid MinWidth="350">
         <StackPanel Margin="5" Orientation="Vertical">
 

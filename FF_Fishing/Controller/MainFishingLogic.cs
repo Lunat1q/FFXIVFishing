@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using WindowsInput;
 using FF_Fishing.Annotations;
 using FF_Fishing.Core;
+using FF_Fishing.Core.Helpers;
 using FF_Fishing.Core.Settings;
 
 namespace FF_Fishing.Controller
@@ -40,6 +41,16 @@ namespace FF_Fishing.Controller
         {
             _settings = settings;
             _dispatcher = dispatcher;
+        }
+
+        public bool WindowTopMost
+        {
+            get => _settings.WindowTopMost;
+            set
+            {
+                _settings.WindowTopMost = value;
+                OnPropertyChanged();
+            }
         }
 
 
@@ -194,9 +205,11 @@ namespace FF_Fishing.Controller
                         AddLogMessage(watch.Elapsed, "Waiting for luring procedure to finish...");
                         await Task.Delay(_settings.UseLure ? _settings.TimersSettings.TackleHook : _settings.TimersSettings.BaitHook, ctx);
 
+                        await Task.Delay(_settings.TimersSettings.Gather, ctx);
+
                         if (_settings.Mooch)
                         {
-                            await Task.Delay(_settings.TimersSettings.Gather * 2, ctx);
+                            await Task.Delay(_settings.TimersSettings.Gather, ctx);
                             AddLogMessage(watch.Elapsed, "Trying to mooch a fish...");
                             _inputSimulator.Keyboard.KeyPress(_settings.BindingSettings.MoochKey);
                         }
@@ -206,14 +219,14 @@ namespace FF_Fishing.Controller
                             _inputSimulator.Keyboard.KeyPress(_settings.BindingSettings.ReleaseKey);
                         }
 
-                        if (_settings.UsePatience)
+                        if (_settings.UsePatience && FishingSkillsInfo.TryUseSkill(FishingSkill.Patience))
                         {
+                            AddLogMessage(watch.Elapsed, "Trying to cast Patience...");
                             _inputSimulator.Keyboard.KeyPress(_settings.BindingSettings.PatienceKey);
                             await Task.Delay(1500, ctx);
                         }
 
                         AddLogMessage(watch.Elapsed, "Finishing up an attempt...");
-                        await Task.Delay(_settings.Mooch ? 0 : _settings.TimersSettings.Gather, ctx);
                     }
                     else
                     {

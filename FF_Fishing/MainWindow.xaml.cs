@@ -60,24 +60,5 @@ namespace FF_Fishing
         {
             FishingSettings.Settings.Save();
         }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            var isChecked = ((CheckBox)sender).IsChecked;
-            if (isChecked != null)
-            {
-                Topmost = isChecked.Value;
-            }
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            var bindingSettings = new BindingSettingsPage(FishingSettings.Settings.BindingSettings)
-            {
-                Topmost = true,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen
-            };
-            bindingSettings.ShowDialog();
-        }
     }
 }
