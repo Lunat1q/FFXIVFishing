@@ -11,13 +11,14 @@ using TiQWpfUtils.Helpers;
 namespace FF_Fishing.Pages
 {
     /// <summary>
-    /// Interaction logic for BindingSettings.xaml
+    /// Interaction logic for AutoSettingsPage.xaml
     /// </summary>
-    public partial class BindingSettings
+    [UIBuilder(nameof(KeyBindingSettings))]
+    public partial class BindingSettingsPage
     {
         private readonly KeyBindingSettings _bindingSettings;
 
-        public BindingSettings(KeyBindingSettings bindingSettings)
+        public BindingSettingsPage(KeyBindingSettings bindingSettings)
         {
             _bindingSettings = bindingSettings;
             InitializeComponent();

@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -89,24 +90,29 @@
     <Compile Include="Controller\FishLogEntry.cs" />
     <Compile Include="Controller\MainFishingLogic.cs" />
     <Compile Include="Core\Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Pages\DataMemberAttribute.cs" />
     <Compile Include="Core\Settings\FishingSettings.cs" />
     <Compile Include="Core\LimitedCollection.cs" />
     <Compile Include="Core\Listener.cs" />
     <Compile Include="Core\Settings\KeyBindingSettings.cs" />
+    <Compile Include="Pages\SliderLimitsAttribute.cs" />
     <Compile Include="Core\Settings\TimersSettings.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\BindingSettings.xaml">
+    <Page Include="Pages\UIBuilders\BindingSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\BindingSettings.xaml.cs">
-      <DependentUpon>BindingSettings.xaml</DependentUpon>
+    <Compile Include="Pages\UIBuilders\BindingSettingsPage.xaml.cs">
+      <DependentUpon>BindingSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UIBuilderAttribute.cs" />
+    <Compile Include="Pages\UIBuilders\Proxy\NotifyPropertyChangedProxy.cs" />
+    <Compile Include="Pages\UIBuilders\SettingsAutoUI.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

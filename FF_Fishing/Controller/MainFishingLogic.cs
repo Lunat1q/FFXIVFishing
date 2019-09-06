@@ -66,46 +66,6 @@ namespace FF_Fishing.Controller
             }
         }
 
-        public bool WindowTopMost
-        {
-            get => _settings?.WindowTopMost ?? false;
-            set
-            {
-                _settings.WindowTopMost = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool UseLure
-        {
-            get => _settings?.UseLure ?? false;
-            set
-            {
-                _settings.UseLure = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool ReleaseFish
-        {
-            get => _settings?.ReleaseFish ?? false;
-            set
-            {
-                _settings.ReleaseFish = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public double BiteSoundMultiplier
-        {
-            get => _settings?.BiteSoundMultiplier ?? 3d;
-            set
-            {
-                _settings.BiteSoundMultiplier = value;
-                OnPropertyChanged();
-            }
-        }
-
         public float AverageSoundLevel
         {
             get => _averageSoundLevel;
@@ -222,7 +182,7 @@ namespace FF_Fishing.Controller
                     await Task.Delay(_settings.TimersSettings.AfterCast, ctx);
 
                     AddLogMessage(watch.Elapsed, "Listening for a catch...");
-                    var fishHeard = await _soundListener.Listen(_settings.TimersSettings.HookWait, BiteSoundMultiplier, ctx);
+                    var fishHeard = await _soundListener.Listen(_settings.TimersSettings.HookWait, _settings.BiteSoundMultiplier, ctx);
 
                     if (fishHeard)
                     {
@@ -232,16 +192,28 @@ namespace FF_Fishing.Controller
                         _inputSimulator.Keyboard.KeyPress(_settings.BindingSettings.HookKey);
 
                         AddLogMessage(watch.Elapsed, "Waiting for luring procedure to finish...");
-                        await Task.Delay(UseLure ? _settings.TimersSettings.TackleHook : _settings.TimersSettings.BaitHook, ctx);
+                        await Task.Delay(_settings.UseLure ? _settings.TimersSettings.TackleHook : _settings.TimersSettings.BaitHook, ctx);
 
-                        if (ReleaseFish)
+                        if (_settings.Mooch)
+                        {
+                            await Task.Delay(_settings.TimersSettings.Gather * 2, ctx);
+                            AddLogMessage(watch.Elapsed, "Trying to mooch a fish...");
+                            _inputSimulator.Keyboard.KeyPress(_settings.BindingSettings.MoochKey);
+                        }
+                        else if (_settings.ReleaseFish)
                         {
                             AddLogMessage(watch.Elapsed, "Trying to release a fish...");
                             _inputSimulator.Keyboard.KeyPress(_settings.BindingSettings.ReleaseKey);
                         }
 
+                        if (_settings.UsePatience)
+                        {
+                            _inputSimulator.Keyboard.KeyPress(_settings.BindingSettings.PatienceKey);
+                            await Task.Delay(1500, ctx);
+                        }
+
                         AddLogMessage(watch.Elapsed, "Finishing up an attempt...");
-                        await Task.Delay(_settings.TimersSettings.Gather, ctx);
+                        await Task.Delay(_settings.Mooch ? 0 : _settings.TimersSettings.Gather, ctx);
                     }
                     else
                     {

@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using FF_Fishing.Controller;
 using FF_Fishing.Core.Settings;
 using FF_Fishing.Pages;
+using FF_Fishing.Pages.UIBuilders;
+using FF_Fishing.Pages.UIBuilders.Proxy;
 
 namespace FF_Fishing
 {
@@ -20,6 +22,17 @@ namespace FF_Fishing
             DataContext = _logic;
             _logic.NewLogEntry += LogicOnNewLogEntry;
             InitializeComponent();
+            InitDynamicElements();
+        }
+
+        private void InitDynamicElements()
+        {
+            SettingsUGrid.Children.Add(
+                SettingsAutoUI.CreateSettingsClassController(
+                    FishingSettings.Settings,
+                    "Settings"
+                )
+            );
         }
 
         private void LogicOnNewLogEntry(object sender, EventArgs e)
@@ -59,7 +72,7 @@ namespace FF_Fishing
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var bindingSettings = new BindingSettings(FishingSettings.Settings.BindingSettings)
+            var bindingSettings = new BindingSettingsPage(FishingSettings.Settings.BindingSettings)
             {
                 Topmost = true,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
