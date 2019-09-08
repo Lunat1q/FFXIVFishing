@@ -3,9 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using FF_Fishing.Controller;
 using FF_Fishing.Core.Settings;
-using FF_Fishing.Pages;
-using FF_Fishing.Pages.UIBuilders;
-using FF_Fishing.Pages.UIBuilders.Proxy;
+using TiqUtils.Wpf.UIBuilders;
 
 namespace FF_Fishing
 {

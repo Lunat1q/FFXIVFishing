@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
-using FF_Fishing.Pages;
 using Newtonsoft.Json;
+using TiqUtils.Wpf.UIBuilders;
 
 namespace FF_Fishing.Core.Settings
 {

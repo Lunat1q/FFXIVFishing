@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
-using FF_Fishing.Pages;
 using Newtonsoft.Json;
 using TiqUtils.SettingsController;
+using TiqUtils.Wpf.UIBuilders;
 
 namespace FF_Fishing.Core.Settings
 {

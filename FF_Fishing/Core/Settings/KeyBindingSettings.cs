@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using WindowsInput.Native;
-using FF_Fishing.Pages;
 using Newtonsoft.Json;
+using TiqUtils.Wpf.UIBuilders;
 
 namespace FF_Fishing.Core.Settings
 {

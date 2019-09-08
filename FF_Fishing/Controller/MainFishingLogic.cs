@@ -187,6 +187,14 @@ namespace FF_Fishing.Controller
                 while (true)
                 {
                     await Task.Delay(_settings.TimersSettings.BeforeCast, ctx);
+
+                    if (_settings.UsePatience && FishingSkillsInfo.TryUseSkill(FishingSkill.Patience))
+                    {
+                        AddLogMessage(watch.Elapsed, "Trying to cast Patience...");
+                        _inputSimulator.Keyboard.KeyPress(_settings.BindingSettings.PatienceKey);
+                        await Task.Delay(1500, ctx);
+                    }
+
                     AddLogMessage(watch.Elapsed, "Casting rod");
                     _inputSimulator.Keyboard.KeyPress(_settings.BindingSettings.CastKey);
 
@@ -217,13 +225,6 @@ namespace FF_Fishing.Controller
                         {
                             AddLogMessage(watch.Elapsed, "Trying to release a fish...");
                             _inputSimulator.Keyboard.KeyPress(_settings.BindingSettings.ReleaseKey);
-                        }
-
-                        if (_settings.UsePatience && FishingSkillsInfo.TryUseSkill(FishingSkill.Patience))
-                        {
-                            AddLogMessage(watch.Elapsed, "Trying to cast Patience...");
-                            _inputSimulator.Keyboard.KeyPress(_settings.BindingSettings.PatienceKey);
-                            await Task.Delay(1500, ctx);
                         }
 
                         AddLogMessage(watch.Elapsed, "Finishing up an attempt...");

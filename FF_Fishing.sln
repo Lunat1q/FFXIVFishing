@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FF_Fishing", "FF_Fishing\FF_Fishing.csproj", "{759DEA08-7E95-4C7F-8B87-F95FC9406D9F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiqUtils", "TiqUtils\TiqUtils\TiqUtils.csproj", "{ADD36AFD-5E81-40E7-93F8-381CF03C5FD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiQWpfUtils", "TiQWpfUtils\TiQWpfUtils\TiQWpfUtils.csproj", "{B03903AE-CB73-4DAB-91D8-439F4AAD4806}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiqUtils.Wpf", "TiQWpfUtils\TiQWpfUtils\TiqUtils.Wpf.csproj", "{B03903AE-CB73-4DAB-91D8-439F4AAD4806}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
