@@ -21,38 +21,38 @@ namespace FF_Fishing.Core.Settings
             SettingsController = new SettingsController<FishingSettings>(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
         }
 
-        [DataMember]
+        [PropertyMember]
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool UseLure { get; set; }
 
-        [DataMember]
+        [PropertyMember]
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool ReleaseFish { get; set; }
 
-        [DataMember]
+        [PropertyMember]
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool WindowTopMost { get; set; } = true;
 
-        [DataMember]
+        [PropertyMember]
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool Mooch { get; set; } = true;
 
-        [DataMember]
+        [PropertyMember]
         [DefaultValue(3)]
         [SliderLimits(1, 10)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public double BiteSoundMultiplier { get; set; } = 3;
 
-        [DataMember]
+        [PropertyMember]
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool UsePatience { get; set; } = true;
 
-        [DataMember]
+        [PropertyMember]
         [JsonProperty]
         public KeyBindingSettings BindingSettings
         {
@@ -60,7 +60,7 @@ namespace FF_Fishing.Core.Settings
             set => _bindingSettings = value;
         }
 
-        [DataMember]
+        [PropertyMember]
         [JsonProperty]
         public TimersSettings TimersSettings
         {
